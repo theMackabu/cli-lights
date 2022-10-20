@@ -24,7 +24,7 @@ var colorCmd = &cobra.Command{
 		if red > 255 || red < 0 || green > 255 || green < 0 || blue > 255 || blue < 0 {
 			color.Red("invalid color range")
 		} else {
-			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Warm, args[1]))
+			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.RGB, args[0], args[1], args[2]))
 			boldWhite.Printf("[%s] ", host)
 			color.Yellow("set color to \033[1;37mr:%v \033[1;37mg:%v \033[1;37mb:%v", color.RedString(args[0]), color.GreenString(args[1]), color.BlueString(args[2]))
 		}
