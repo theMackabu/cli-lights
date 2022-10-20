@@ -7,7 +7,7 @@ import (
 
 const (
 	Power   = `{"id":1,"method":"setState","params":{"state":%s}}`
-	Dimming = `{"id":1,"method":"setPilot","params":{"dimming":100}}`
+	Dimming = `{"id":1,"method":"setPilot","params":{"dimming":%s}}`
 	Warm    = `{"id":1,"method":"setPilot","params":{"w":%s,"dimming":100}}`
 	Cold    = `{"id":1,"method":"setPilot","params":{"c":%s,"dimming":100}}`
 	Scene   = `{"id":1,"method":"setPilot","params":{"sceneId":%s,"dimming":100}}`

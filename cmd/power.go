@@ -9,7 +9,7 @@ import (
 
 var powerCmd = &cobra.Command{
 	Use:   "power",
-	Short: "Prints the current date.",
+	Short: "changes the light state.",
 	Run: func(cmd *cobra.Command, args []string) {
 		ocelet, _ := cmd.Flags().GetString("ocelet")
 		power, _ := cmd.Flags().GetString("power")
@@ -27,6 +27,6 @@ var powerCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(powerCmd)
 
-	powerCmd.Flags().StringP("ocelet", "o", "", `specify light IP ocelet (example "01")`)
-	powerCmd.Flags().StringP("power", "p", "", `light power state (example "on|off")`)
+	powerCmd.Flags().StringP("ocelet", "o", "", `lightbulb IP ending ocelet ("01")`)
+	powerCmd.Flags().StringP("power", "p", "", `power state ("on|off")`)
 }
