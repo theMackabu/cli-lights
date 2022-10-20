@@ -4,22 +4,28 @@ import (
 	"fmt"
 	"lights/helpers"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
 var powerCmd = &cobra.Command{
 	Use:   "power",
 	Short: "changes the light state.",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		ocelet, _ := cmd.Flags().GetString("ocelet")
-		power, _ := cmd.Flags().GetString("power")
 		host := fmt.Sprintf("192.168.86.%s", ocelet)
+		boldWhite := color.New(color.FgWhite, color.Bold)
 
-		if power == "on" {
+		if args[0] == "on" {
 			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Power, "true"))
+			boldWhite.Printf("[%s] ", host)
+			color.Green("light powered on")
 		}
-		if power == "off" {
+		if args[0] == "off" {
 			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Power, "false"))
+			boldWhite.Printf("[%s] ", host)
+			color.Yellow("light powered off")
 		}
 	},
 }
@@ -28,5 +34,5 @@ func init() {
 	rootCmd.AddCommand(powerCmd)
 
 	powerCmd.Flags().StringP("ocelet", "o", "", `lightbulb IP ending ocelet ("01")`)
-	powerCmd.Flags().StringP("power", "p", "", `power state ("on|off")`)
+	powerCmd.MarkFlagRequired("ocelet")
 }
