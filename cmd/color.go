@@ -8,8 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var powerCmd = &cobra.Command{
-	Use:   "power",
+var colorCmd = &cobra.Command{
+	Use:   "color",
 	Short: "changes whether it's on or off.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -31,8 +31,8 @@ var powerCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(powerCmd)
+	rootCmd.AddCommand(colorCmd)
 
-	powerCmd.Flags().StringP("ocelet", "o", "", `lightbulb IP ending ocelet ("01")`)
-	powerCmd.MarkFlagRequired("ocelet")
+	colorCmd.Flags().StringP("ocelet", "o", "", `lightbulb IP ending ocelet ("01")`)
+	colorCmd.MarkFlagRequired("ocelet")
 }

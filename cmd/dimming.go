@@ -11,7 +11,7 @@ import (
 
 var brightnessCmd = &cobra.Command{
 	Use:   "brightness",
-	Short: "changes the lights brightness.",
+	Short: "sets the dimmer of the bulb in percent.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		ocelet, _ := cmd.Flags().GetString("ocelet")
