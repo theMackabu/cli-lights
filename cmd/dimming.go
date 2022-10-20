@@ -24,7 +24,7 @@ var brightnessCmd = &cobra.Command{
 		} else {
 			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Dimming, args[0]))
 			boldWhite.Printf("[%s] ", host)
-			color.Blue("set brightness to %v", color.CyanString(fmt.Sprintf("%s%%", args[0])))
+			color.Blue("set brightness to %v", color.GreenString(fmt.Sprintf("%s%%", args[0])))
 		}
 
 	},

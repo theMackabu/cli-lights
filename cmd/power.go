@@ -25,7 +25,7 @@ var powerCmd = &cobra.Command{
 		if args[0] == "off" {
 			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Power, "false"))
 			boldWhite.Printf("[%s] ", host)
-			color.Yellow("light powered off")
+			color.Magenta("light powered off")
 		}
 	},
 }

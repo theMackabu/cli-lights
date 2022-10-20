@@ -9,11 +9,11 @@ const (
 	Power   = `{"id":1,"method":"setState","params":{"state":%s}}`
 	Dimming = `{"id":1,"method":"setPilot","params":{"dimming":%s}}`
 	Speed   = `{"id":1,"method":"setPilot","params":{"speed":%s}}`
-	Warm    = `{"id":1,"method":"setPilot","params":{"w":%s,"dimming":100}}`
-	Cold    = `{"id":1,"method":"setPilot","params":{"c":%s,"dimming":100}}`
-	Scene   = `{"id":1,"method":"setPilot","params":{"sceneId":%s,"dimming":100}}`
-	Temp    = `{"id":1,"method":"setPilot","params":{"temp":%s,"dimming":100}}`
-	RGB     = `{"id":1,"method":"setPilot","params":{"r":%s,"g":%s,"b":%s,"dimming":100}}`
+	Warm    = `{"id":1,"method":"setPilot","params":{"w":%s}}`
+	Cold    = `{"id":1,"method":"setPilot","params":{"c":%s}}`
+	Scene   = `{"id":1,"method":"setPilot","params":{"sceneId":%s}}`
+	Temp    = `{"id":1,"method":"setPilot","params":{"temp":%s}}`
+	RGB     = `{"id":1,"method":"setPilot","params":{"r":%s,"g":%s,"b":%s}}`
 )
 
 var Scenes = [32]string{
