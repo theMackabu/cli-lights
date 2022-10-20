@@ -54,9 +54,14 @@ var Scenes = [32]string{
 func RunClient(addr string, cmd string) {
 	conn, err := net.Dial("udp", addr)
 	if err != nil {
-		fmt.Printf("Can't connect to server: %s\n", err)
+		fmt.Printf("can't connect to server: %s\n", err)
 		return
 	}
 
-	conn.Write([]byte(cmd))
+	_, err = conn.Write([]byte(cmd))
+
+	if err != nil {
+		fmt.Printf("can't write to server: %s\n", err)
+		return
+	}
 }
