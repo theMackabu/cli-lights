@@ -7,7 +7,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// dateCmd represents the date command
 var powerCmd = &cobra.Command{
 	Use:   "power",
 	Short: "Prints the current date.",
@@ -16,13 +15,18 @@ var powerCmd = &cobra.Command{
 		power, _ := cmd.Flags().GetString("power")
 		host := fmt.Sprintf("192.168.86.%s", ocelet)
 
-		helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Power, power))
+		if power == "on" {
+			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Power, "true"))
+		}
+		if power == "off" {
+			helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), fmt.Sprintf(helpers.Power, "false"))
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(powerCmd)
 
-	powerCmd.Flags().StringP("ocelet", "o", "21", "specify light IP ocelet")
-	powerCmd.Flags().StringP("power", "p", "true", "light power state")
+	powerCmd.Flags().StringP("ocelet", "o", "", `specify light IP ocelet (example "01")`)
+	powerCmd.Flags().StringP("power", "p", "", `light power state (example "on|off")`)
 }
