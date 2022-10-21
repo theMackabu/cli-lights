@@ -61,16 +61,16 @@ func Write(conn net.Conn, content string) (int, error) {
 	return number, err
 }
 
-func RunClient(addr string, cmd string) string {
+func RunClient(addr string, cmd string) []byte {
 	conn, err := net.Dial("udp", addr)
 	recvBuf := make([]byte, 1024)
 
 	if err != nil {
-		return fmt.Sprintf("can't connect to server: %s\n", err)
+		fmt.Printf("can't connect to server: %s\n", err)
 	}
 
 	Write(conn, cmd)
 	conn.Read(recvBuf[:])
 
-	return string(recvBuf)
+	return recvBuf
 }
