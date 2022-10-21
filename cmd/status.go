@@ -35,20 +35,35 @@ var statusCmd = &cobra.Command{
 		debug, _ := cmd.Flags().GetBool("debug")
 		host := fmt.Sprintf("192.168.86.%s", ocelet)
 		boldWhite := color.New(color.FgWhite, color.Bold)
+		boldYellow := color.New(color.FgYellow, color.Bold)
 
 		res := helpers.RunClient(fmt.Sprintf("%s:%s", host, "38899"), `{"method":"getPilot"}`)
 		n := bytes.Index(res[:], []byte{0})
 		json.Unmarshal(res[:n], &response)
-		boldWhite.Printf("[%s] ", host)
 
 		if debug {
+			boldWhite.Printf("[%s] ", host)
 			color.Cyan(string(res))
 		} else {
+			boldWhite.Printf("Information for %s:\n", host)
+			boldYellow.Print("  - MAC Address: ")
+			color.Blue(response.Result.MAC)
+			boldYellow.Print("  - RSSi: ")
+			color.Blue(fmt.Sprintf("%d", response.Result.Rssi))
+			boldWhite.Printf("\nStatus for %s:\n", host)
 			if response.Result.State {
-				color.Cyan("on")
+				boldYellow.Print("  - Power: ")
+				color.Green("on")
 			} else {
-				color.Cyan("off")
+				boldYellow.Print("  - Power: ")
+				color.Red("off")
 			}
+			boldYellow.Print("  - Brightness: ")
+			color.Cyan(fmt.Sprintf("%d%%", response.Result.Dimming))
+			boldYellow.Print("  - Scene: ")
+			color.Magenta(helpers.Scenes[response.Result.SceneID-1])
+			boldYellow.Print("  - Color Temp [kelvin]: ")
+			color.Cyan(fmt.Sprintf("%d", response.Result.Temp))
 
 		}
 
