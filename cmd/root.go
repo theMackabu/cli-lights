@@ -13,6 +13,7 @@ var rootCmd = &cobra.Command{
 	Short:   "control internal lights",
 	Version: "v0.0.1",
 }
+var DebugMode bool
 
 func Execute() {
 	c := make(chan os.Signal, 1)

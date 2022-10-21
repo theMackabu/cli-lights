@@ -1,6 +1,8 @@
 package main
 
-import "lights/cmd"
+import (
+	"lights/cmd"
+)
 
 func main() {
 	cmd.Execute()

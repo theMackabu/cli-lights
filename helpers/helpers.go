@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"bufio"
 	"fmt"
 	"net"
 )
@@ -51,17 +52,25 @@ var Scenes = [32]string{
 	"steam punk",
 }
 
-func RunClient(addr string, cmd string) {
+func Write(conn net.Conn, content string) (int, error) {
+	writer := bufio.NewWriter(conn)
+	number, err := writer.WriteString(content)
+	if err == nil {
+		err = writer.Flush()
+	}
+	return number, err
+}
+
+func RunClient(addr string, cmd string) string {
 	conn, err := net.Dial("udp", addr)
-	if err != nil {
-		fmt.Printf("can't connect to server: %s\n", err)
-		return
-	}
-
-	_, err = conn.Write([]byte(cmd))
+	recvBuf := make([]byte, 1024)
 
 	if err != nil {
-		fmt.Printf("can't write to server: %s\n", err)
-		return
+		return fmt.Sprintf("can't connect to server: %s\n", err)
 	}
+
+	Write(conn, cmd)
+	conn.Read(recvBuf[:])
+
+	return string(recvBuf)
 }
