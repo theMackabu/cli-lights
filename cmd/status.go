@@ -23,6 +23,11 @@ type Result struct {
 	SceneID int64  `json:"sceneId"`
 	Temp    int64  `json:"temp"`
 	Dimming int64  `json:"dimming"`
+	Warm    int64  `json:"w"`
+	Cold    int64  `json:"c"`
+	Red     int64  `json:"r"`
+	Green   int64  `json:"g"`
+	Blue    int64  `json:"b"`
 }
 
 var response Response
@@ -60,10 +65,14 @@ var statusCmd = &cobra.Command{
 			}
 			boldYellow.Print("  - Brightness: ")
 			color.Cyan(fmt.Sprintf("%d%%", response.Result.Dimming))
-			boldYellow.Print("  - Scene: ")
-			color.Magenta(helpers.Scenes[response.Result.SceneID-1])
-			boldYellow.Print("  - Color Temp [kelvin]: ")
-			color.Cyan(fmt.Sprintf("%d", response.Result.Temp))
+			if response.Result.SceneID > 0 {
+				boldYellow.Print("  - Scene: ")
+				color.Magenta(helpers.Scenes[response.Result.SceneID-1])
+			}
+			if response.Result.Temp > 0 {
+				boldYellow.Print("  - Color Temp [kelvin]: ")
+				color.Cyan(fmt.Sprintf("%d", response.Result.Temp))
+			}
 
 		}
 
